@@ -6,180 +6,125 @@
 <meta name="theme-color" content="#101114">
 <title>ChestCounter — Lifetime</title>
 <style>
-  :root { color-scheme: dark; --bg:#101114; --panel:#1b1d23; --muted:#a5a8b2; --text:#f5f6fa; --accent:#a6f36b; --line:#30333c; --danger:#ff7777; }
-  * { box-sizing:border-box; }
-  body { margin:0; min-height:100vh; background:radial-gradient(ellipse at top,#242832 0,#101114 55%); color:var(--text); font:16px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
-  main { width:min(760px,100%); margin:auto; padding:24px 18px calc(36px + env(safe-area-inset-bottom)); }
-  header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:22px; }
-  h1 { margin:0; font-size:clamp(1.6rem,5vw,2.2rem); letter-spacing:-.04em; }
-  .tag { color:var(--accent); font-size:.75rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
-  .card { background:rgba(27,29,35,.94); border:1px solid var(--line); border-radius:22px; padding:20px; margin:14px 0; box-shadow:0 14px 40px #0003; }
-  .counter { text-align:center; padding:28px 18px 24px; }
-  .eyebrow { color:var(--muted); font-size:.8rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
-  #total { font-size:clamp(5rem,22vw,8rem); font-weight:850; line-height:1.05; letter-spacing:-.07em; font-variant-numeric:tabular-nums; margin:8px 0 20px; }
-  button { border:0; border-radius:14px; padding:14px 18px; font:700 1rem system-ui; cursor:pointer; min-height:50px; }
-  button:disabled { opacity:.45; cursor:not-allowed; }
-  .primary { background:var(--accent); color:#11150c; }
-  .secondary { background:#30343e; color:var(--text); border:1px solid #444955; }
-  .danger { background:#3a2428; color:#ffaaaa; border:1px solid #694047; }
-  .actions { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .actions .primary { grid-column:1/-1; min-height:64px; font-size:1.2rem; }
-  .section-head { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
-  h2 { font-size:1.1rem; margin:0; }
-  .hint { color:var(--muted); font-size:.9rem; margin:8px 0 0; }
-  video { width:100%; display:block; aspect-ratio:16/9; object-fit:contain; background:#08090b; border-radius:14px; border:1px solid var(--line); }
-  .camera-actions { display:flex; flex-wrap:wrap; gap:9px; margin-top:12px; }
-  .status { color:var(--muted); font-size:.88rem; margin-top:10px; min-height:1.4em; overflow-wrap:anywhere; }
-  .status.error { color:#ff9b9b; }
-  .calibration { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:12px; }
-  .calibration button { font-size:.9rem; }
-  .small { font-size:.82rem; color:var(--muted); }
-  .footer { text-align:center; color:#858995; font-size:.8rem; padding:12px 8px; }
-  @media (max-width:420px) { main{padding-inline:12px} .card{padding:16px;border-radius:18px} }
+:root{color-scheme:dark;--bg:#101114;--panel:#1b1d23;--muted:#a5a8b2;--text:#f5f6fa;--accent:#a6f36b;--line:#30333c}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#242832 0,#101114 55%);color:var(--text);font:16px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{width:min(760px,100%);margin:auto;padding:24px 18px calc(36px + env(safe-area-inset-bottom))}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}
+h1{margin:0;font-size:clamp(1.6rem,5vw,2.2rem);letter-spacing:-.04em}
+.tag{color:var(--accent);font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.card{background:rgba(27,29,35,.94);border:1px solid var(--line);border-radius:22px;padding:20px;margin:14px 0;box-shadow:0 14px 40px #0003}
+.counter{text-align:center;padding:28px 18px 24px}
+.eyebrow{color:var(--muted);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+#total{font-size:clamp(5rem,22vw,8rem);font-weight:850;line-height:1.05;letter-spacing:-.07em;font-variant-numeric:tabular-nums;margin:8px 0 20px}
+button{border:0;border-radius:14px;padding:14px 18px;font:700 1rem system-ui;cursor:pointer;min-height:50px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.primary{background:var(--accent);color:#11150c}
+.secondary{background:#30343e;color:var(--text);border:1px solid #444955}
+.danger{background:#3a2428;color:#ffaaaa;border:1px solid #694047}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.actions .primary{grid-column:1/-1;min-height:64px;font-size:1.2rem}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+h2{font-size:1.1rem;margin:0}
+.hint{color:var(--muted);font-size:.9rem;margin:8px 0 0}
+.preview-wrap{position:relative;width:100%;background:#08090b;border-radius:14px;overflow:hidden;border:1px solid var(--line);line-height:0;touch-action:manipulation}
+video{width:100%;height:auto;min-height:150px;max-height:55vh;display:block;object-fit:contain;background:#08090b}
+#markers{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#tapLayer{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:manipulation}
+.camera-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.status{color:var(--muted);font-size:.88rem;margin-top:10px;min-height:1.4em;overflow-wrap:anywhere}
+.status.error{color:#ff9b9b}
+.calibration{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
+.calibration button{font-size:.9rem}
+.calibration button.active{outline:2px solid var(--accent);background:#35452b}
+.small{font-size:.82rem;color:var(--muted)}
+.footer{text-align:center;color:#858995;font-size:.8rem;padding:12px 8px}
+@media(max-width:420px){main{padding-inline:12px}.card{padding:16px;border-radius:18px}}
 </style>
 </head>
 <body>
 <main>
-  <header>
-    <div><div class="tag">Personal Fortnite tracker</div><h1>ChestCounter</h1></div>
-    <div class="small">LIFETIME</div>
-  </header>
-
-  <section class="card counter" aria-live="polite">
-    <div class="eyebrow">Total chests opened</div>
-    <div id="total">0</div>
-    <div class="actions">
-      <button class="primary" id="add">＋ Add one chest</button>
-      <button class="secondary" id="undo">Undo last</button>
-      <button class="danger" id="reset">Reset total</button>
-    </div>
-    <p class="hint">Your total is saved on this device in this browser.</p>
-  </section>
-
-  <section class="card">
-    <div class="section-head"><h2>Camera preview</h2><span class="small">On-device only</span></div>
-    <video id="video" autoplay playsinline muted></video>
-    <div class="camera-actions">
-      <button class="primary" id="start">Enable camera</button>
-      <button class="secondary" id="stop" disabled>Stop camera</button>
-    </div>
-    <div class="status" id="cameraStatus">Camera is off. Open this page in Safari over HTTPS and allow camera access.</div>
-    <p class="hint">This preview does not automatically detect or count chests yet. Use “Add one chest” to update your lifetime total.</p>
-  </section>
-
-  <section class="card">
-    <div class="section-head"><h2>Monitor calibration</h2><span class="small">Optional setup</span></div>
-    <p class="hint">With the camera running, tap the four buttons in order and then tap the matching monitor corner in the video preview. These points are saved on this device. This prototype saves the points but does not yet apply perspective correction.</p>
-    <div class="calibration">
-      <button class="secondary" data-corner="topLeft">1 · Top left</button>
-      <button class="secondary" data-corner="topRight">2 · Top right</button>
-      <button class="secondary" data-corner="bottomRight">3 · Bottom right</button>
-      <button class="secondary" data-corner="bottomLeft">4 · Bottom left</button>
-    </div>
-    <div class="status" id="calStatus">No calibration points saved.</div>
-    <button class="secondary" id="clearCal" style="margin-top:10px">Clear calibration</button>
-  </section>
-  <div class="footer">No account · No uploads · No game interaction</div>
+<header><div><div class="tag">Personal Fortnite tracker</div><h1>ChestCounter</h1></div><div class="small">LIFETIME</div></header>
+<section class="card counter" aria-live="polite">
+<div class="eyebrow">Total chests opened</div><div id="total">0</div>
+<div class="actions"><button class="primary" id="add">＋ Add one chest</button><button class="secondary" id="undo">Undo last</button><button class="danger" id="reset">Reset total</button></div>
+<p class="hint">Your total is saved on this device in this browser.</p>
+</section>
+<section class="card">
+<div class="section-head"><h2>Camera preview</h2><span class="small">On-device only</span></div>
+<div class="preview-wrap" id="previewWrap">
+<video id="video" autoplay playsinline muted></video>
+<canvas id="markers"></canvas>
+<div id="tapLayer" aria-label="Tap the monitor corner here"></div>
+</div>
+<div class="camera-actions"><button class="primary" id="start">Enable camera</button><button class="secondary" id="stop" disabled>Stop camera</button></div>
+<div class="status" id="cameraStatus">Camera is off. Open this page in Safari over HTTPS and allow camera access.</div>
+<p class="hint">This preview does not automatically detect or count chests yet. Use “Add one chest” to update your lifetime total.</p>
+</section>
+<section class="card">
+<div class="section-head"><h2>Monitor calibration</h2><span class="small">Optional setup</span></div>
+<p class="hint">Choose a corner below, then tap that exact corner of your monitor in the camera preview. Repeat for all four corners. The selected point is marked on the preview.</p>
+<div class="calibration">
+<button class="secondary" data-corner="topLeft">1 · Top left</button><button class="secondary" data-corner="topRight">2 · Top right</button>
+<button class="secondary" data-corner="bottomRight">3 · Bottom right</button><button class="secondary" data-corner="bottomLeft">4 · Bottom left</button>
+</div>
+<div class="status" id="calStatus">No calibration points saved.</div>
+<button class="secondary" id="clearCal" style="margin-top:10px">Clear calibration</button>
+</section>
+<div class="footer">No account · No uploads · No game interaction</div>
 </main>
 <script>
 (() => {
-  const TOTAL_KEY = "chestcounter_lifetime_v2";
-  const CAL_KEY = "chestcounter_calibration";
-  const totalEl = document.getElementById("total");
-  const video = document.getElementById("video");
-  const cameraStatus = document.getElementById("cameraStatus");
-  const calStatus = document.getElementById("calStatus");
-  let total = Number.parseInt(localStorage.getItem(TOTAL_KEY) || "0", 10);
-  if (!Number.isFinite(total) || total < 0) total = 0;
-  let stream = null;
-  let previousTotal = null;
-  let calibration = JSON.parse(localStorage.getItem(CAL_KEY) || "{}");
-
-  function render() {
-    totalEl.textContent = total.toLocaleString();
-    document.getElementById("undo").disabled = previousTotal === null;
-    localStorage.setItem(TOTAL_KEY, String(total));
-  }
-  function renderCalibration() {
-    const names = ["topLeft", "topRight", "bottomRight", "bottomLeft"];
-    const count = names.filter(n => calibration[n]).length;
-    calStatus.textContent = count === 4
-      ? "All four points saved on this device."
-      : `${count} of 4 points saved.`;
-  }
-  document.getElementById("add").addEventListener("click", () => {
-    previousTotal = total; total += 1; render();
-  });
-  document.getElementById("undo").addEventListener("click", () => {
-    if (previousTotal !== null) { total = previousTotal; previousTotal = null; render(); }
-  });
-  document.getElementById("reset").addEventListener("click", () => {
-    if (confirm("Reset your lifetime chest total to zero? This cannot be undone.")) {
-      previousTotal = total; total = 0; render();
-    }
-  });
-
-  function setCameraMessage(message, isError=false) {
-    cameraStatus.textContent = message;
-    cameraStatus.classList.toggle("error", isError);
-  }
-  document.getElementById("start").addEventListener("click", async () => {
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-      setCameraMessage("Camera access is unavailable here. Open the published HTTPS page directly in Safari.", true);
-      return;
-    }
-    try {
-      stream = await navigator.mediaDevices.getUserMedia({
-        audio: false,
-        video: { facingMode: { ideal: "environment" }, width: { ideal: 1920 }, height: { ideal: 1080 } }
-      });
-      video.srcObject = stream;
-      await video.play();
-      document.getElementById("start").disabled = true;
-      document.getElementById("stop").disabled = false;
-      setCameraMessage("Camera is on. Keep Safari in the foreground and your iPhone awake.");
-    } catch (err) {
-      const messages = {
-        NotAllowedError: "Camera permission was denied. In iPhone Settings → Apps → Safari → Camera, choose Ask or Allow; then reload this website.",
-        NotFoundError: "No camera was found on this device.",
-        NotReadableError: "The camera may already be in use by another app. Close other camera apps and try again."
-      };
-      setCameraMessage(messages[err.name] || `Could not start camera: ${err.name || "Unknown error"}${err.message ? " — " + err.message : ""}`, true);
-    }
-  });
-  function stopCamera() {
-    if (stream) stream.getTracks().forEach(track => track.stop());
-    stream = null; video.srcObject = null;
-    document.getElementById("start").disabled = false;
-    document.getElementById("stop").disabled = true;
-    setCameraMessage("Camera is off.");
-  }
-  document.getElementById("stop").addEventListener("click", stopCamera);
-  document.querySelectorAll("[data-corner]").forEach(button => {
-    button.addEventListener("click", () => {
-      if (!stream || !video.videoWidth || !video.videoHeight) {
-        setCameraMessage("Start the camera first, then select a corner.", true);
-        return;
-      }
-      const corner = button.dataset.corner;
-      const labels = {topLeft:"top-left",topRight:"top-right",bottomRight:"bottom-right",bottomLeft:"bottom-left"};
-      const answer = prompt(`Enter the ${labels[corner]} point as x,y in video pixels (video is ${video.videoWidth} × ${video.videoHeight}). Example: 120,80`);
-      if (answer === null) return;
-      const parts = answer.split(",").map(v => Number(v.trim()));
-      if (parts.length !== 2 || !parts.every(Number.isFinite)) {
-        calStatus.textContent = "Please enter two numbers separated by a comma.";
-        return;
-      }
-      calibration[corner] = {x:parts[0], y:parts[1]};
-      localStorage.setItem(CAL_KEY, JSON.stringify(calibration));
-      renderCalibration();
-    });
-  });
-  document.getElementById("clearCal").addEventListener("click", () => {
-    calibration = {}; localStorage.removeItem(CAL_KEY); renderCalibration();
-  });
-  window.addEventListener("pagehide", stopCamera);
-  render(); renderCalibration();
+const TOTAL_KEY="chestcounter_lifetime_v2",CAL_KEY="chestcounter_calibration";
+const totalEl=document.getElementById("total"),video=document.getElementById("video"),cameraStatus=document.getElementById("cameraStatus"),calStatus=document.getElementById("calStatus");
+const canvas=document.getElementById("markers"),ctx=canvas.getContext("2d"),tapLayer=document.getElementById("tapLayer");
+let total=Number.parseInt(localStorage.getItem(TOTAL_KEY)||"0",10);if(!Number.isFinite(total)||total<0)total=0;
+let stream=null,previousTotal=null,activeCorner=null,calibration={};
+try{calibration=JSON.parse(localStorage.getItem(CAL_KEY)||"{}")||{}}catch(e){calibration={}}
+const cornerNames={topLeft:"Top left",topRight:"Top right",bottomRight:"Bottom right",bottomLeft:"Bottom left"};
+function render(){totalEl.textContent=total.toLocaleString();document.getElementById("undo").disabled=previousTotal===null;localStorage.setItem(TOTAL_KEY,String(total))}
+function renderCalibration(){
+const names=Object.keys(cornerNames),count=names.filter(n=>calibration[n]).length;
+calStatus.textContent=count===4?"All four monitor corners saved.":`${count} of 4 corners saved.`;drawMarkers();
+document.querySelectorAll("[data-corner]").forEach(b=>b.classList.toggle("active",b.dataset.corner===activeCorner));
+}
+function drawMarkers(){
+const rect=tapLayer.getBoundingClientRect(),dpr=window.devicePixelRatio||1;
+canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,rect.width,rect.height);
+const vw=video.videoWidth,vh=video.videoHeight;if(!vw||!vh)return;
+const scale=Math.min(rect.width/vw,rect.height/vh),w=vw*scale,h=vh*scale,ox=(rect.width-w)/2,oy=(rect.height-h)/2;
+Object.entries(cornerNames).forEach(([key,label])=>{const p=calibration[key];if(!p)return;const x=ox+p.x*w,y=oy+p.y*h;
+ctx.beginPath();ctx.arc(x,y,10,0,Math.PI*2);ctx.fillStyle="#a6f36b";ctx.fill();ctx.lineWidth=3;ctx.strokeStyle="#111";ctx.stroke();
+ctx.font="bold 12px system-ui";ctx.textAlign="left";ctx.fillStyle="#fff";ctx.fillText(label,x+13,y-10);
+});
+}
+document.getElementById("add").onclick=()=>{previousTotal=total;total++;render()};
+document.getElementById("undo").onclick=()=>{if(previousTotal!==null){total=previousTotal;previousTotal=null;render()}};
+document.getElementById("reset").onclick=()=>{if(confirm("Reset your lifetime chest total to zero? This cannot be undone.")){previousTotal=total;total=0;render()}};
+function setCameraMessage(m,err=false){cameraStatus.textContent=m;cameraStatus.classList.toggle("error",err)}
+document.getElementById("start").onclick=async()=>{
+if(!navigator.mediaDevices?.getUserMedia){setCameraMessage("Camera access is unavailable here. Open the published HTTPS page directly in Safari.",true);return}
+try{
+stream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:"environment"},width:{ideal:1920},height:{ideal:1080}}});
+video.srcObject=stream;await video.play();document.getElementById("start").disabled=true;document.getElementById("stop").disabled=false;
+setCameraMessage("Camera is on. Select a calibration corner, then tap it in the preview.");drawMarkers();
+}catch(err){const messages={NotAllowedError:"Camera permission was denied. In iPhone Settings → Apps → Safari → Camera, choose Ask or Allow; then reload this website.",NotFoundError:"No camera was found on this device.",NotReadableError:"The camera may already be in use by another app. Close other camera apps and try again."};setCameraMessage(messages[err.name]||`Could not start camera: ${err.name||"Unknown error"}${err.message?" — "+err.message:""}`,true)}
+};
+function stopCamera(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;video.srcObject=null;document.getElementById("start").disabled=false;document.getElementById("stop").disabled=true;setCameraMessage("Camera is off.");ctx.clearRect(0,0,canvas.width,canvas.height)}
+document.getElementById("stop").onclick=stopCamera;
+document.querySelectorAll("[data-corner]").forEach(b=>b.onclick=()=>{if(!stream){setCameraMessage("Enable the camera first.",true);return}activeCorner=b.dataset.corner;renderCalibration();setCameraMessage(`Now tap the ${cornerNames[activeCorner].toLowerCase()} corner of your monitor in the preview.`)});
+tapLayer.addEventListener("click",e=>{
+if(!activeCorner){setCameraMessage("Choose one of the four corner buttons first.");return}
+const rect=tapLayer.getBoundingClientRect(),vw=video.videoWidth,vh=video.videoHeight;if(!vw||!vh)return;
+const scale=Math.min(rect.width/vw,rect.height/vh),w=vw*scale,h=vh*scale,ox=(rect.width-w)/2,oy=(rect.height-h)/2;
+const x=e.clientX-rect.left-ox,y=e.clientY-rect.top-oy;
+if(x<0||y<0||x>w||y>h){setCameraMessage("Tap inside the visible camera image, not the black bars.");return}
+calibration[activeCorner]={x:x/w,y:y/h};localStorage.setItem(CAL_KEY,JSON.stringify(calibration));
+const done=activeCorner;activeCorner=null;renderCalibration();setCameraMessage(`${cornerNames[done]} corner saved. Choose the next corner.`);
+});
+document.getElementById("clearCal").onclick=()=>{calibration={};activeCorner=null;localStorage.removeItem(CAL_KEY);renderCalibration();setCameraMessage("Calibration cleared.")};
+video.addEventListener("loadedmetadata",drawMarkers);window.addEventListener("resize",drawMarkers);window.addEventListener("pagehide",stopCamera);
+render();renderCalibration();
 })();
 </script>
 </body>
