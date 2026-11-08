@@ -11,28 +11,28 @@
 html,body{margin:0;min-height:100%;background:#111318;color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 body{background:radial-gradient(ellipse at 50% -15%,#30394a,#111318 58%);overflow-x:hidden}
 main{width:min(560px,100%);margin:0 auto;padding:calc(9px + env(safe-area-inset-top)) 13px calc(8px + env(safe-area-inset-bottom));min-height:100svh;display:flex;flex-direction:column;gap:8px}
-header{display:flex;justify-content:space-between;align-items:center;min-height:43px;padding:0 3px}
+header{display:flex;justify-content:space-between;align-items:center;min-height:48px;padding:0 3px}
 .kicker{font-size:.62rem;letter-spacing:.14em;font-weight:850;color:var(--lime);text-transform:uppercase}
-h1{font-size:1.35rem;line-height:1.1;letter-spacing:-.045em;margin:2px 0 0}
+h1{font-size:1.42rem;line-height:1.1;letter-spacing:-.045em;margin:2px 0 0}
 .pirate{font-size:1.55rem}
-.card{background:rgba(27,31,39,.97);border:1px solid var(--line);border-radius:17px;padding:12px;box-shadow:0 8px 24px #0003}
-.counter{text-align:center;padding:12px}
+.card{background:rgba(27,31,39,.97);border:1px solid var(--line);border-radius:19px;padding:16px;box-shadow:0 8px 24px #0003}
+.counter{text-align:center;padding:17px}
 .label{color:var(--muted);font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800}
-.big{font-size:clamp(3.4rem,13vw,5rem);font-weight:880;letter-spacing:-.075em;line-height:1.02;font-variant-numeric:tabular-nums;margin:2px 0 8px}
-.btnrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-button{border:0;border-radius:11px;min-height:44px;padding:9px 8px;font:800 .98rem system-ui;cursor:pointer;touch-action:manipulation}
+.big{font-size:clamp(3.4rem,13vw,5rem);font-weight:880;letter-spacing:-.075em;line-height:1.02;font-variant-numeric:tabular-nums;margin:5px 0 12px}
+.btnrow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+button{border:0;border-radius:11px;min-height:51px;padding:11px 8px;font:800 .98rem system-ui;cursor:pointer;touch-action:manipulation}
 button:active{transform:scale(.98)}
 .add{background:var(--lime);color:#17200d}
 .minus{background:#343b48;color:var(--text);border:1px solid #4a5362}
-.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:8px}
-.control{background:#292f3a;color:#e9edf4;border:1px solid #424b5b;min-height:38px;font-size:.78rem;padding:7px 4px}
+.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:11px}
+.control{background:#292f3a;color:#e9edf4;border:1px solid #424b5b;min-height:44px;font-size:.8rem;padding:7px 4px}
 .control.active{border-color:var(--lime);color:var(--lime)}
-.panel{display:none;text-align:left;margin-top:9px;padding:10px;border:1px solid #3a4351;border-radius:12px;background:#13171e}
+.panel{display:none;text-align:left;margin-top:12px;padding:12px;border:1px solid #3a4351;border-radius:12px;background:#13171e}
 .panel.open{display:block}
 .panel label{display:block;color:var(--muted);font-size:.75rem;margin-bottom:5px}
 .panel input{width:100%;min-height:39px;border:1px solid #465061;border-radius:9px;background:#0e1218;color:var(--text);padding:7px 9px;font:650 .92rem system-ui}
 .panel-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}
-.mini{min-height:38px;font-size:.78rem;padding:7px 11px}
+.mini{min-height:44px;font-size:.8rem;padding:7px 11px}
 .party-options{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
 .party-options button{min-height:37px;font-size:.76rem;padding:6px 2px;background:#292f3a;color:var(--text);border:1px solid #424b5b}
 .party-options button.selected{background:#34452a;color:var(--lime);border-color:var(--lime)}
@@ -40,22 +40,22 @@ button:active{transform:scale(.98)}
 .powerline input[type=checkbox]{width:21px;height:21px;accent-color:var(--lime);margin:0}
 .powerline input[type=number]{min-height:38px;border:1px solid #465061;border-radius:9px;background:#0e1218;color:var(--text);padding:6px 8px;width:82px;font:650 .9rem system-ui}
 .power-label{font-size:.83rem;font-weight:750}
-.stats-card{padding:11px 12px}
-.stats-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.stats-card{padding:15px 15px}
+.stats-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
 .stats-head strong{font-size:.82rem}
 .party-tag{font-size:.7rem;color:var(--lime);font-weight:750}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.stat{background:#13171e;border:1px solid #303744;border-radius:11px;padding:8px 10px;min-width:0}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:#13171e;border:1px solid #303744;border-radius:13px;padding:11px 12px;min-width:0}
 .caption{font-size:.65rem;color:var(--muted);line-height:1.2}
 .value{font-size:clamp(1.2rem,5vw,1.65rem);font-weight:850;letter-spacing:-.045em;font-variant-numeric:tabular-nums;margin-top:2px;overflow-wrap:anywhere;line-height:1.1}
-.chance-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;margin-top:8px;padding:9px 10px;border-radius:11px;background:#13171e;border:1px solid #303744}
+.chance-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;margin-top:12px;padding:12px 13px;border-radius:11px;background:#13171e;border:1px solid #303744}
 .chance-title{font-size:.68rem;color:var(--muted);line-height:1.2}
 .chance{font-size:clamp(1.45rem,6vw,2rem);font-weight:900;color:var(--lime);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
 .progress{height:6px;border-radius:20px;background:#343b48;overflow:hidden;margin-top:7px}
 .progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--gold));border-radius:20px}
-.footnote{font-size:.63rem;line-height:1.3;color:#929baa;margin:6px 2px 0}
-footer{text-align:center;color:#747e8d;font-size:.63rem;margin-top:auto;padding-top:2px}
-@media(max-height:780px){main{gap:6px;padding-top:5px}.card{padding:9px}.counter{padding:9px}.big{font-size:3.2rem;margin:1px 0 6px}.btnrow button{min-height:40px}.controls{margin-top:6px}.control{min-height:34px}.stats-card{padding:9px}.stat{padding:7px 9px}.chance-row{margin-top:6px;padding:7px 9px}}
+.footnote{font-size:.63rem;line-height:1.3;color:#929baa;margin:9px 2px 0}
+footer{text-align:center;color:#747e8d;font-size:.63rem;margin-top:auto;padding-top:8px}
+@media(max-height:780px){main{gap:8px;padding-top:5px}.card{padding:11px}.counter{padding:11px}.big{font-size:3.2rem;margin:2px 0 8px}.btnrow button{min-height:43px}.controls{margin-top:8px}.control{min-height:38px}.stats-card{padding:11px}.stat{padding:8px 10px}.chance-row{margin-top:8px;padding:9px 10px}}
 @media(max-width:360px){main{padding-left:9px;padding-right:9px}.card{border-radius:14px}.controls{gap:5px}.control{font-size:.7rem}}
 </style>
 </head>
@@ -71,7 +71,7 @@ footer{text-align:center;color:#747e8d;font-size:.63rem;margin-top:auto;padding-
     <button class="add" data-add="5">+5</button>
     <button class="add" data-add="10">+10</button>
   </div>
-  <div style="margin-top:7px"><button class="minus" id="minus" style="width:100%;min-height:38px">−1</button></div>
+  <div style="margin-top:7px"><button class="minus" id="minus" style="width:100%;min-height:44px">−1</button></div>
   <div class="controls">
     <button class="control" data-panel="manualPanel">✎ Set total</button>
     <button class="control" data-panel="partyPanel">👥 Party: <span id="partyShort">Squad</span></button>
