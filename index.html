@@ -1,15 +1,148 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111318"><title>Pirate Token Tracker</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111318">
+<title>Pirate Token Tracker</title>
 <style>
-:root{color-scheme:dark;--bg:#111318;--panel:#1b1f27;--line:#303744;--text:#f4f6fa;--muted:#a8afbd;--lime:#b8f36b;--gold:#ffd166}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#30394a,#111318 58%);color:var(--text);font:16px/1.45 system-ui,-apple-system,sans-serif}main{width:min(680px,100%);margin:auto;padding:24px 16px 40px}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.kicker{font-size:.72rem;letter-spacing:.14em;font-weight:800;color:var(--lime);text-transform:uppercase}h1{font-size:clamp(1.7rem,6vw,2.3rem);letter-spacing:-.045em;margin:2px 0}.sub,.note{color:var(--muted)}.sub{font-size:.88rem}.card{background:rgba(27,31,39,.96);border:1px solid var(--line);border-radius:20px;padding:18px;margin:13px 0;box-shadow:0 12px 32px #0003}.label{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;font-weight:750}.total{text-align:center;padding:24px 12px}.big{font-size:clamp(4.5rem,20vw,6.6rem);font-weight:850;letter-spacing:-.075em;line-height:1.1;font-variant-numeric:tabular-nums;margin:7px 0 16px}.btnrow{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}button{border:0;border-radius:13px;min-height:52px;padding:12px 10px;font:750 1rem system-ui;cursor:pointer}.add{background:var(--lime);color:#17200d}.minus{background:#343b48;color:var(--text);border:1px solid #4a5362}.outline{background:#292f3a;color:var(--text);border:1px solid #424b5b}.fieldrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;color:var(--muted);font-size:.85rem;margin-bottom:6px}input,select{width:100%;min-height:48px;border:1px solid #465061;border-radius:12px;background:#11151c;color:var(--text);padding:10px 12px;font:600 1rem system-ui}input[type=checkbox]{width:22px;height:22px;min-height:0;accent-color:var(--lime)}.inline{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.power{border:1px solid #66552d;background:linear-gradient(135deg,#332b1b,#24232a)}.power h2{color:var(--gold)}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#13171e;border:1px solid #303744;border-radius:14px;padding:14px}.value{font-size:clamp(1.45rem,6vw,2rem);font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin-top:4px;overflow-wrap:anywhere}.caption{font-size:.78rem;color:var(--muted)}.progress{height:10px;border-radius:20px;background:#343b48;overflow:hidden;margin:12px 0 6px}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--gold));border-radius:20px}.note{font-size:.83rem;margin:10px 0 0}.footer{text-align:center;color:#7f8795;font-size:.78rem;padding:12px}@media(max-width:390px){.card{padding:15px}.fieldrow{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:11px}}
-</style></head><body><main>
-<header><div><div class="kicker">Fortnite · Personal tracker</div><h1>Pirate Token Tracker</h1><div class="sub">Your chest count and estimated party odds</div></div><div style="font-size:1.8rem">🏴‍☠️</div></header>
-<section class="card total"><div class="label">My lifetime chests opened</div><div class="big" id="myTotal">0</div><div class="btnrow"><button class="add" data-add="1">+1</button><button class="add" data-add="5">+5</button><button class="add" data-add="10">+10</button></div><div style="margin-top:10px"><button class="minus" id="minus" style="width:100%">−1</button></div><p class="note">Saved automatically in this browser on this device.</p></section>
-<section class="card"><div class="label" style="margin-bottom:12px">Set your total manually</div><div class="fieldrow"><div><label for="manualTotal">Lifetime opens</label><input id="manualTotal" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g. 1638"></div><div style="display:flex;align-items:end"><button class="outline" id="setTotal" style="width:100%">Set total</button></div></div><p class="note">Setting a total manually resets its Power Hour history; the entered number is treated as normal, unboosted opens.</p></section>
-<section class="card"><div class="label" style="margin-bottom:12px">Party size</div><label for="party">Choose your party size</label><select id="party"><option value="1">Solo · 1 player</option><option value="2">Duo · 2 players</option><option value="3">Trio · 3 players</option><option value="4">Squad · 4 players</option></select><p class="note">Estimated party opens = your opens × party size. This assumes each party member opens as many chests as you.</p></section>
-<section class="card power"><div class="inline" style="justify-content:space-between"><h2 style="margin:0;font-size:1.15rem">⚡ Power Hour</h2><label class="inline" style="margin:0;color:var(--text)"><input id="powerOn" type="checkbox"> Active</label></div><div class="fieldrow" style="margin-top:14px"><div><label for="multiplier">Drop-rate multiplier</label><input id="multiplier" type="number" min="1" max="100" step=".1" inputmode="decimal" value="1.5"></div><div style="display:flex;align-items:end"><div class="sub" id="powerStatus">Currently off · 1×</div></div></div><p class="note">While active, new opens are credited at this multiplier. Example: +10 at 1.5× adds 15 effective opens. Turning it off keeps the boost already earned.</p></section>
-<section class="card"><div class="label">Estimated party progress</div><div class="stats" style="margin-top:12px"><div class="stat"><div class="caption">My effective opens</div><div class="value" id="myEffective">0</div></div><div class="stat"><div class="caption">Party effective opens</div><div class="value" id="partyEffective">0</div></div></div><div style="margin-top:18px"><div class="label">Estimated chance your party has found the token</div><div class="value" id="chance" style="font-size:clamp(1.8rem,8vw,2.8rem);color:var(--lime)">0.000%</div><div class="progress"><div id="progressBar"></div></div><div class="sub" id="progressText">0 of 137,500 effective party opens</div></div><div class="stats" style="margin-top:16px"><div class="stat"><div class="caption">Expected party opens until one drop</div><div class="value" id="expected">137,500</div></div><div class="stat"><div class="caption">Expected opens remaining</div><div class="value" id="remaining">137,500</div></div></div><p class="note">Assumed drop chance: 1 in 137,500 per effective chest. Chance = 1 − (1 − 1/137,500)<sup>effective party opens</sup>. “Expected remaining” is an average, not a guarantee or pity counter. The token could drop next chest—or take much longer.</p></section>
-<div class="footer">Saved locally · No account · No video or gameplay data collected</div></main>
+:root{color-scheme:dark;--bg:#111318;--panel:#1b1f27;--line:#303744;--text:#f4f6fa;--muted:#a8afbd;--lime:#b8f36b;--gold:#ffd166}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#111318;color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{background:radial-gradient(ellipse at 50% -15%,#30394a,#111318 58%);overflow-x:hidden}
+main{width:min(560px,100%);margin:0 auto;padding:calc(9px + env(safe-area-inset-top)) 13px calc(8px + env(safe-area-inset-bottom));min-height:100svh;display:flex;flex-direction:column;gap:8px}
+header{display:flex;justify-content:space-between;align-items:center;min-height:43px;padding:0 3px}
+.kicker{font-size:.62rem;letter-spacing:.14em;font-weight:850;color:var(--lime);text-transform:uppercase}
+h1{font-size:1.35rem;line-height:1.1;letter-spacing:-.045em;margin:2px 0 0}
+.pirate{font-size:1.55rem}
+.card{background:rgba(27,31,39,.97);border:1px solid var(--line);border-radius:17px;padding:12px;box-shadow:0 8px 24px #0003}
+.counter{text-align:center;padding:12px}
+.label{color:var(--muted);font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800}
+.big{font-size:clamp(3.4rem,13vw,5rem);font-weight:880;letter-spacing:-.075em;line-height:1.02;font-variant-numeric:tabular-nums;margin:2px 0 8px}
+.btnrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+button{border:0;border-radius:11px;min-height:44px;padding:9px 8px;font:800 .98rem system-ui;cursor:pointer;touch-action:manipulation}
+button:active{transform:scale(.98)}
+.add{background:var(--lime);color:#17200d}
+.minus{background:#343b48;color:var(--text);border:1px solid #4a5362}
+.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:8px}
+.control{background:#292f3a;color:#e9edf4;border:1px solid #424b5b;min-height:38px;font-size:.78rem;padding:7px 4px}
+.control.active{border-color:var(--lime);color:var(--lime)}
+.panel{display:none;text-align:left;margin-top:9px;padding:10px;border:1px solid #3a4351;border-radius:12px;background:#13171e}
+.panel.open{display:block}
+.panel label{display:block;color:var(--muted);font-size:.75rem;margin-bottom:5px}
+.panel input{width:100%;min-height:39px;border:1px solid #465061;border-radius:9px;background:#0e1218;color:var(--text);padding:7px 9px;font:650 .92rem system-ui}
+.panel-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:end}
+.mini{min-height:38px;font-size:.78rem;padding:7px 11px}
+.party-options{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.party-options button{min-height:37px;font-size:.76rem;padding:6px 2px;background:#292f3a;color:var(--text);border:1px solid #424b5b}
+.party-options button.selected{background:#34452a;color:var(--lime);border-color:var(--lime)}
+.powerline{display:grid;grid-template-columns:auto 1fr 82px;gap:9px;align-items:center}
+.powerline input[type=checkbox]{width:21px;height:21px;accent-color:var(--lime);margin:0}
+.powerline input[type=number]{min-height:38px;border:1px solid #465061;border-radius:9px;background:#0e1218;color:var(--text);padding:6px 8px;width:82px;font:650 .9rem system-ui}
+.power-label{font-size:.83rem;font-weight:750}
+.stats-card{padding:11px 12px}
+.stats-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.stats-head strong{font-size:.82rem}
+.party-tag{font-size:.7rem;color:var(--lime);font-weight:750}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.stat{background:#13171e;border:1px solid #303744;border-radius:11px;padding:8px 10px;min-width:0}
+.caption{font-size:.65rem;color:var(--muted);line-height:1.2}
+.value{font-size:clamp(1.2rem,5vw,1.65rem);font-weight:850;letter-spacing:-.045em;font-variant-numeric:tabular-nums;margin-top:2px;overflow-wrap:anywhere;line-height:1.1}
+.chance-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;margin-top:8px;padding:9px 10px;border-radius:11px;background:#13171e;border:1px solid #303744}
+.chance-title{font-size:.68rem;color:var(--muted);line-height:1.2}
+.chance{font-size:clamp(1.45rem,6vw,2rem);font-weight:900;color:var(--lime);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.progress{height:6px;border-radius:20px;background:#343b48;overflow:hidden;margin-top:7px}
+.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--gold));border-radius:20px}
+.footnote{font-size:.63rem;line-height:1.3;color:#929baa;margin:6px 2px 0}
+footer{text-align:center;color:#747e8d;font-size:.63rem;margin-top:auto;padding-top:2px}
+@media(max-height:780px){main{gap:6px;padding-top:5px}.card{padding:9px}.counter{padding:9px}.big{font-size:3.2rem;margin:1px 0 6px}.btnrow button{min-height:40px}.controls{margin-top:6px}.control{min-height:34px}.stats-card{padding:9px}.stat{padding:7px 9px}.chance-row{margin-top:6px;padding:7px 9px}}
+@media(max-width:360px){main{padding-left:9px;padding-right:9px}.card{border-radius:14px}.controls{gap:5px}.control{font-size:.7rem}}
+</style>
+</head>
+<body>
+<main>
+<header><div><div class="kicker">Fortnite · Personal tracker</div><h1>Pirate Token Tracker</h1></div><div class="pirate" aria-hidden="true">🏴‍☠️</div></header>
+
+<section class="card counter">
+  <div class="label">My lifetime chests opened</div>
+  <div class="big" id="myTotal">0</div>
+  <div class="btnrow">
+    <button class="add" data-add="1">+1</button>
+    <button class="add" data-add="5">+5</button>
+    <button class="add" data-add="10">+10</button>
+  </div>
+  <div style="margin-top:7px"><button class="minus" id="minus" style="width:100%;min-height:38px">−1</button></div>
+  <div class="controls">
+    <button class="control" data-panel="manualPanel">✎ Set total</button>
+    <button class="control" data-panel="partyPanel">👥 Party: <span id="partyShort">Squad</span></button>
+    <button class="control" data-panel="powerPanel">⚡ Power Hour</button>
+  </div>
+  <div class="panel" id="manualPanel">
+    <div class="panel-row"><div><label for="manualTotal">Set lifetime opens</label><input id="manualTotal" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g. 1638"></div><button class="add mini" id="setTotal">Save total</button></div>
+    <div class="footnote">Setting a total manually resets the effective count to that number (no historical Power Hour boost).</div>
+  </div>
+  <div class="panel" id="partyPanel">
+    <label>Choose your party size</label>
+    <div class="party-options">
+      <button data-party="1">Solo</button><button data-party="2">Duo</button><button data-party="3">Trio</button><button data-party="4">Squad</button>
+    </div>
+  </div>
+  <div class="panel" id="powerPanel">
+    <div class="powerline">
+      <input id="powerOn" type="checkbox" aria-label="Power Hour active">
+      <div><div class="power-label">Power Hour active</div><div class="footnote" style="margin:1px 0 0">Applies to new opens only</div></div>
+      <div><label for="multiplier">Multiplier</label><input id="multiplier" type="number" min="1" max="100" step=".1" inputmode="decimal" value="1.5"></div>
+    </div>
+  </div>
+</section>
+
+<section class="card stats-card">
+  <div class="stats-head"><strong>Estimated party progress</strong><span class="party-tag" id="partyLabel">SQUAD ×4</span></div>
+  <div class="stats">
+    <div class="stat"><div class="caption">My effective opens</div><div class="value" id="myEffective">0</div></div>
+    <div class="stat"><div class="caption">Party effective opens</div><div class="value" id="partyEffective">0</div></div>
+    <div class="stat"><div class="caption">Average opens per drop</div><div class="value">137,500</div></div>
+    <div class="stat"><div class="caption">Expected party opens remaining*</div><div class="value" id="remaining">137,500</div></div>
+  </div>
+  <div class="chance-row">
+    <div><div class="chance-title">Estimated chance your party has found the Pirate Token</div><div class="progress"><div id="progressBar"></div></div></div>
+    <div class="chance" id="chance">0.000%</div>
+  </div>
+  <div class="footnote">Assumes 1 drop per 137,500 effective chests, independently. *Remaining is an average, not a guarantee or pity counter. Party estimate assumes each teammate opens as many chests as you.</div>
+</section>
+<footer>Saved on this device · No account · No video or gameplay data collected</footer>
+</main>
 <script>
-(()=>{const KEY="pirate_token_tracker_v1",DROP=137500,defaults={opens:0,effectiveOpens:0,party:4,multiplier:1.5,powerOn:false};let d={...defaults};try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&typeof s==="object")d={...defaults,...s}}catch(e){}const $=id=>document.getElementById(id),fmt=n=>Math.round(n).toLocaleString();function save(){localStorage.setItem(KEY,JSON.stringify(d))}function render(){ $("myTotal").textContent=fmt(d.opens);$("manualTotal").value=d.opens;$("party").value=String(d.party);$("multiplier").value=d.multiplier;$("powerOn").checked=!!d.powerOn;$("powerStatus").textContent=d.powerOn?`Active · ${d.multiplier}×`:"Currently off · 1×";$("myEffective").textContent=fmt(d.effectiveOpens);const pe=d.effectiveOpens*d.party;$("partyEffective").textContent=fmt(pe);const p=1-Math.pow(1-1/DROP,pe);$("chance").textContent=(p*100).toFixed(p*100<.001?5:3)+"%";$("progressBar").style.width=Math.min(100,pe/DROP*100)+"%";$("progressText").textContent=`${fmt(pe)} of ${fmt(DROP)} effective party opens (average target)`;$("expected").textContent=fmt(DROP);$("remaining").textContent=fmt(Math.max(0,DROP-pe));save()}function add(n){d.opens+=n;d.effectiveOpens+=n*(d.powerOn?Number(d.multiplier):1);render()}document.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>add(Number(b.dataset.add)));$("minus").onclick=()=>{if(d.opens<=0)return;d.opens--;d.effectiveOpens=Math.max(0,d.effectiveOpens-(d.powerOn?Number(d.multiplier):1));render()};$("setTotal").onclick=()=>{const v=Number($("manualTotal").value);if(!Number.isSafeInteger(v)||v<0){alert("Enter a whole number of 0 or more.");return}d.opens=v;d.effectiveOpens=v;render()};$("party").onchange=e=>{d.party=Number(e.target.value);render()};$("multiplier").onchange=e=>{let v=Number(e.target.value);if(!Number.isFinite(v)||v<1)v=1;if(v>100)v=100;d.multiplier=v;render()};$("powerOn").onchange=e=>{d.powerOn=e.target.checked;render()};render()})();
+(()=> {
+const KEY="pirate_token_tracker_v1",DROP=137500,defaults={opens:0,effectiveOpens:0,party:4,multiplier:1.5,powerOn:false};
+let d={...defaults};try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&typeof s==="object")d={...defaults,...s}}catch(e){}
+const $=id=>document.getElementById(id),fmt=n=>Math.round(n).toLocaleString(),partyNames={1:"Solo",2:"Duo",3:"Trio",4:"Squad"};
+function save(){localStorage.setItem(KEY,JSON.stringify(d))}
+function render(){
+$("myTotal").textContent=fmt(d.opens);$("manualTotal").value=d.opens;$("partyShort").textContent=partyNames[d.party];$("partyLabel").textContent=partyNames[d.party].toUpperCase()+" ×"+d.party;
+$("multiplier").value=d.multiplier;$("powerOn").checked=!!d.powerOn;
+document.querySelectorAll("[data-party]").forEach(b=>b.classList.toggle("selected",Number(b.dataset.party)===d.party));
+$("myEffective").textContent=fmt(d.effectiveOpens);
+const pe=d.effectiveOpens*d.party;$("partyEffective").textContent=fmt(pe);
+const p=1-Math.pow(1-1/DROP,pe),pct=p*100;
+$("chance").textContent=(pct<.001?pct.toFixed(5):pct.toFixed(3))+"%";
+$("progressBar").style.width=Math.min(100,pe/DROP*100)+"%";
+$("remaining").textContent=fmt(Math.max(0,DROP-pe));
+save();
+}
+function add(n){d.opens+=n;d.effectiveOpens+=n*(d.powerOn?Number(d.multiplier):1);render()}
+document.querySelectorAll("[data-add]").forEach(b=>b.addEventListener("click",()=>add(Number(b.dataset.add))));
+$("minus").addEventListener("click",()=>{if(d.opens<=0)return;d.opens--;d.effectiveOpens=Math.max(0,d.effectiveOpens-(d.powerOn?Number(d.multiplier):1));render()});
+$("setTotal").addEventListener("click",()=>{const v=Number($("manualTotal").value);if(!Number.isSafeInteger(v)||v<0){alert("Enter a whole number of 0 or more.");return}d.opens=v;d.effectiveOpens=v;render();$("manualPanel").classList.remove("open");document.querySelector('[data-panel="manualPanel"]').classList.remove("active")});
+document.querySelectorAll("[data-party]").forEach(b=>b.addEventListener("click",()=>{d.party=Number(b.dataset.party);render()}));
+$("multiplier").addEventListener("change",e=>{let v=Number(e.target.value);if(!Number.isFinite(v)||v<1)v=1;if(v>100)v=100;d.multiplier=v;render()});
+$("powerOn").addEventListener("change",e=>{d.powerOn=e.target.checked;render()});
+document.querySelectorAll("[data-panel]").forEach(b=>b.addEventListener("click",()=>{
+const id=b.dataset.panel,wasOpen=$(id).classList.contains("open");
+document.querySelectorAll(".panel").forEach(p=>p.classList.remove("open"));
+document.querySelectorAll("[data-panel]").forEach(x=>x.classList.remove("active"));
+if(!wasOpen){$(id).classList.add("open");b.classList.add("active")}
+}));
+render();
+})();
 </script></body></html>
