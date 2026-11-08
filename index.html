@@ -1,131 +1,15 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#101114">
-<title>ChestCounter — Lifetime</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111318"><title>Pirate Token Tracker</title>
 <style>
-:root{color-scheme:dark;--bg:#101114;--panel:#1b1d23;--muted:#a5a8b2;--text:#f5f6fa;--accent:#a6f36b;--line:#30333c}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:radial-gradient(ellipse at top,#242832 0,#101114 55%);color:var(--text);font:16px/1.45 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-main{width:min(760px,100%);margin:auto;padding:24px 18px calc(36px + env(safe-area-inset-bottom))}
-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}
-h1{margin:0;font-size:clamp(1.6rem,5vw,2.2rem);letter-spacing:-.04em}
-.tag{color:var(--accent);font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-.card{background:rgba(27,29,35,.94);border:1px solid var(--line);border-radius:22px;padding:20px;margin:14px 0;box-shadow:0 14px 40px #0003}
-.counter{text-align:center;padding:28px 18px 24px}
-.eyebrow{color:var(--muted);font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
-#total{font-size:clamp(5rem,22vw,8rem);font-weight:850;line-height:1.05;letter-spacing:-.07em;font-variant-numeric:tabular-nums;margin:8px 0 20px}
-button{border:0;border-radius:14px;padding:14px 18px;font:700 1rem system-ui;cursor:pointer;min-height:50px}
-button:disabled{opacity:.45;cursor:not-allowed}
-.primary{background:var(--accent);color:#11150c}
-.secondary{background:#30343e;color:var(--text);border:1px solid #444955}
-.danger{background:#3a2428;color:#ffaaaa;border:1px solid #694047}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.actions .primary{grid-column:1/-1;min-height:64px;font-size:1.2rem}
-.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
-h2{font-size:1.1rem;margin:0}
-.hint{color:var(--muted);font-size:.9rem;margin:8px 0 0}
-.preview-wrap{position:relative;width:100%;background:#08090b;border-radius:14px;overflow:hidden;border:1px solid var(--line);line-height:0;touch-action:manipulation}
-video{width:100%;height:auto;min-height:150px;max-height:55vh;display:block;object-fit:contain;background:#08090b}
-#markers{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-#tapLayer{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:manipulation}
-.camera-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
-.status{color:var(--muted);font-size:.88rem;margin-top:10px;min-height:1.4em;overflow-wrap:anywhere}
-.status.error{color:#ff9b9b}
-.calibration{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}
-.calibration button{font-size:.9rem}
-.calibration button.active{outline:2px solid var(--accent);background:#35452b}
-.small{font-size:.82rem;color:var(--muted)}
-.footer{text-align:center;color:#858995;font-size:.8rem;padding:12px 8px}
-@media(max-width:420px){main{padding-inline:12px}.card{padding:16px;border-radius:18px}}
-</style>
-</head>
-<body>
-<main>
-<header><div><div class="tag">Personal Fortnite tracker</div><h1>ChestCounter</h1></div><div class="small">LIFETIME</div></header>
-<section class="card counter" aria-live="polite">
-<div class="eyebrow">Total chests opened</div><div id="total">0</div>
-<div class="actions"><button class="primary" id="add">＋ Add one chest</button><button class="secondary" id="undo">Undo last</button><button class="danger" id="reset">Reset total</button></div>
-<p class="hint">Your total is saved on this device in this browser.</p>
-</section>
-<section class="card">
-<div class="section-head"><h2>Camera preview</h2><span class="small">On-device only</span></div>
-<div class="preview-wrap" id="previewWrap">
-<video id="video" autoplay playsinline muted></video>
-<canvas id="markers"></canvas>
-<div id="tapLayer" aria-label="Tap the monitor corner here"></div>
-</div>
-<div class="camera-actions"><button class="primary" id="start">Enable camera</button><button class="secondary" id="stop" disabled>Stop camera</button></div>
-<div class="status" id="cameraStatus">Camera is off. Open this page in Safari over HTTPS and allow camera access.</div>
-<p class="hint">This preview does not automatically detect or count chests yet. Use “Add one chest” to update your lifetime total.</p>
-</section>
-<section class="card">
-<div class="section-head"><h2>Monitor calibration</h2><span class="small">Optional setup</span></div>
-<p class="hint">Choose a corner below, then tap that exact corner of your monitor in the camera preview. Repeat for all four corners. The selected point is marked on the preview.</p>
-<div class="calibration">
-<button class="secondary" data-corner="topLeft">1 · Top left</button><button class="secondary" data-corner="topRight">2 · Top right</button>
-<button class="secondary" data-corner="bottomRight">3 · Bottom right</button><button class="secondary" data-corner="bottomLeft">4 · Bottom left</button>
-</div>
-<div class="status" id="calStatus">No calibration points saved.</div>
-<button class="secondary" id="clearCal" style="margin-top:10px">Clear calibration</button>
-</section>
-<div class="footer">No account · No uploads · No game interaction</div>
-</main>
+:root{color-scheme:dark;--bg:#111318;--panel:#1b1f27;--line:#303744;--text:#f4f6fa;--muted:#a8afbd;--lime:#b8f36b;--gold:#ffd166}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -15%,#30394a,#111318 58%);color:var(--text);font:16px/1.45 system-ui,-apple-system,sans-serif}main{width:min(680px,100%);margin:auto;padding:24px 16px 40px}header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.kicker{font-size:.72rem;letter-spacing:.14em;font-weight:800;color:var(--lime);text-transform:uppercase}h1{font-size:clamp(1.7rem,6vw,2.3rem);letter-spacing:-.045em;margin:2px 0}.sub,.note{color:var(--muted)}.sub{font-size:.88rem}.card{background:rgba(27,31,39,.96);border:1px solid var(--line);border-radius:20px;padding:18px;margin:13px 0;box-shadow:0 12px 32px #0003}.label{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;font-weight:750}.total{text-align:center;padding:24px 12px}.big{font-size:clamp(4.5rem,20vw,6.6rem);font-weight:850;letter-spacing:-.075em;line-height:1.1;font-variant-numeric:tabular-nums;margin:7px 0 16px}.btnrow{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}button{border:0;border-radius:13px;min-height:52px;padding:12px 10px;font:750 1rem system-ui;cursor:pointer}.add{background:var(--lime);color:#17200d}.minus{background:#343b48;color:var(--text);border:1px solid #4a5362}.outline{background:#292f3a;color:var(--text);border:1px solid #424b5b}.fieldrow{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;color:var(--muted);font-size:.85rem;margin-bottom:6px}input,select{width:100%;min-height:48px;border:1px solid #465061;border-radius:12px;background:#11151c;color:var(--text);padding:10px 12px;font:600 1rem system-ui}input[type=checkbox]{width:22px;height:22px;min-height:0;accent-color:var(--lime)}.inline{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.power{border:1px solid #66552d;background:linear-gradient(135deg,#332b1b,#24232a)}.power h2{color:var(--gold)}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#13171e;border:1px solid #303744;border-radius:14px;padding:14px}.value{font-size:clamp(1.45rem,6vw,2rem);font-weight:800;letter-spacing:-.04em;font-variant-numeric:tabular-nums;margin-top:4px;overflow-wrap:anywhere}.caption{font-size:.78rem;color:var(--muted)}.progress{height:10px;border-radius:20px;background:#343b48;overflow:hidden;margin:12px 0 6px}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--gold));border-radius:20px}.note{font-size:.83rem;margin:10px 0 0}.footer{text-align:center;color:#7f8795;font-size:.78rem;padding:12px}@media(max-width:390px){.card{padding:15px}.fieldrow{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:11px}}
+</style></head><body><main>
+<header><div><div class="kicker">Fortnite · Personal tracker</div><h1>Pirate Token Tracker</h1><div class="sub">Your chest count and estimated party odds</div></div><div style="font-size:1.8rem">🏴‍☠️</div></header>
+<section class="card total"><div class="label">My lifetime chests opened</div><div class="big" id="myTotal">0</div><div class="btnrow"><button class="add" data-add="1">+1</button><button class="add" data-add="5">+5</button><button class="add" data-add="10">+10</button></div><div style="margin-top:10px"><button class="minus" id="minus" style="width:100%">−1</button></div><p class="note">Saved automatically in this browser on this device.</p></section>
+<section class="card"><div class="label" style="margin-bottom:12px">Set your total manually</div><div class="fieldrow"><div><label for="manualTotal">Lifetime opens</label><input id="manualTotal" type="number" min="0" step="1" inputmode="numeric" placeholder="e.g. 1638"></div><div style="display:flex;align-items:end"><button class="outline" id="setTotal" style="width:100%">Set total</button></div></div><p class="note">Setting a total manually resets its Power Hour history; the entered number is treated as normal, unboosted opens.</p></section>
+<section class="card"><div class="label" style="margin-bottom:12px">Party size</div><label for="party">Choose your party size</label><select id="party"><option value="1">Solo · 1 player</option><option value="2">Duo · 2 players</option><option value="3">Trio · 3 players</option><option value="4">Squad · 4 players</option></select><p class="note">Estimated party opens = your opens × party size. This assumes each party member opens as many chests as you.</p></section>
+<section class="card power"><div class="inline" style="justify-content:space-between"><h2 style="margin:0;font-size:1.15rem">⚡ Power Hour</h2><label class="inline" style="margin:0;color:var(--text)"><input id="powerOn" type="checkbox"> Active</label></div><div class="fieldrow" style="margin-top:14px"><div><label for="multiplier">Drop-rate multiplier</label><input id="multiplier" type="number" min="1" max="100" step=".1" inputmode="decimal" value="1.5"></div><div style="display:flex;align-items:end"><div class="sub" id="powerStatus">Currently off · 1×</div></div></div><p class="note">While active, new opens are credited at this multiplier. Example: +10 at 1.5× adds 15 effective opens. Turning it off keeps the boost already earned.</p></section>
+<section class="card"><div class="label">Estimated party progress</div><div class="stats" style="margin-top:12px"><div class="stat"><div class="caption">My effective opens</div><div class="value" id="myEffective">0</div></div><div class="stat"><div class="caption">Party effective opens</div><div class="value" id="partyEffective">0</div></div></div><div style="margin-top:18px"><div class="label">Estimated chance your party has found the token</div><div class="value" id="chance" style="font-size:clamp(1.8rem,8vw,2.8rem);color:var(--lime)">0.000%</div><div class="progress"><div id="progressBar"></div></div><div class="sub" id="progressText">0 of 137,500 effective party opens</div></div><div class="stats" style="margin-top:16px"><div class="stat"><div class="caption">Expected party opens until one drop</div><div class="value" id="expected">137,500</div></div><div class="stat"><div class="caption">Expected opens remaining</div><div class="value" id="remaining">137,500</div></div></div><p class="note">Assumed drop chance: 1 in 137,500 per effective chest. Chance = 1 − (1 − 1/137,500)<sup>effective party opens</sup>. “Expected remaining” is an average, not a guarantee or pity counter. The token could drop next chest—or take much longer.</p></section>
+<div class="footer">Saved locally · No account · No video or gameplay data collected</div></main>
 <script>
-(() => {
-const TOTAL_KEY="chestcounter_lifetime_v2",CAL_KEY="chestcounter_calibration";
-const totalEl=document.getElementById("total"),video=document.getElementById("video"),cameraStatus=document.getElementById("cameraStatus"),calStatus=document.getElementById("calStatus");
-const canvas=document.getElementById("markers"),ctx=canvas.getContext("2d"),tapLayer=document.getElementById("tapLayer");
-let total=Number.parseInt(localStorage.getItem(TOTAL_KEY)||"0",10);if(!Number.isFinite(total)||total<0)total=0;
-let stream=null,previousTotal=null,activeCorner=null,calibration={};
-try{calibration=JSON.parse(localStorage.getItem(CAL_KEY)||"{}")||{}}catch(e){calibration={}}
-const cornerNames={topLeft:"Top left",topRight:"Top right",bottomRight:"Bottom right",bottomLeft:"Bottom left"};
-function render(){totalEl.textContent=total.toLocaleString();document.getElementById("undo").disabled=previousTotal===null;localStorage.setItem(TOTAL_KEY,String(total))}
-function renderCalibration(){
-const names=Object.keys(cornerNames),count=names.filter(n=>calibration[n]).length;
-calStatus.textContent=count===4?"All four monitor corners saved.":`${count} of 4 corners saved.`;drawMarkers();
-document.querySelectorAll("[data-corner]").forEach(b=>b.classList.toggle("active",b.dataset.corner===activeCorner));
-}
-function drawMarkers(){
-const rect=tapLayer.getBoundingClientRect(),dpr=window.devicePixelRatio||1;
-canvas.width=Math.round(rect.width*dpr);canvas.height=Math.round(rect.height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,rect.width,rect.height);
-const vw=video.videoWidth,vh=video.videoHeight;if(!vw||!vh)return;
-const scale=Math.min(rect.width/vw,rect.height/vh),w=vw*scale,h=vh*scale,ox=(rect.width-w)/2,oy=(rect.height-h)/2;
-Object.entries(cornerNames).forEach(([key,label])=>{const p=calibration[key];if(!p)return;const x=ox+p.x*w,y=oy+p.y*h;
-ctx.beginPath();ctx.arc(x,y,10,0,Math.PI*2);ctx.fillStyle="#a6f36b";ctx.fill();ctx.lineWidth=3;ctx.strokeStyle="#111";ctx.stroke();
-ctx.font="bold 12px system-ui";ctx.textAlign="left";ctx.fillStyle="#fff";ctx.fillText(label,x+13,y-10);
-});
-}
-document.getElementById("add").onclick=()=>{previousTotal=total;total++;render()};
-document.getElementById("undo").onclick=()=>{if(previousTotal!==null){total=previousTotal;previousTotal=null;render()}};
-document.getElementById("reset").onclick=()=>{if(confirm("Reset your lifetime chest total to zero? This cannot be undone.")){previousTotal=total;total=0;render()}};
-function setCameraMessage(m,err=false){cameraStatus.textContent=m;cameraStatus.classList.toggle("error",err)}
-document.getElementById("start").onclick=async()=>{
-if(!navigator.mediaDevices?.getUserMedia){setCameraMessage("Camera access is unavailable here. Open the published HTTPS page directly in Safari.",true);return}
-try{
-stream=await navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:{ideal:"environment"},width:{ideal:1920},height:{ideal:1080}}});
-video.srcObject=stream;await video.play();document.getElementById("start").disabled=true;document.getElementById("stop").disabled=false;
-setCameraMessage("Camera is on. Select a calibration corner, then tap it in the preview.");drawMarkers();
-}catch(err){const messages={NotAllowedError:"Camera permission was denied. In iPhone Settings → Apps → Safari → Camera, choose Ask or Allow; then reload this website.",NotFoundError:"No camera was found on this device.",NotReadableError:"The camera may already be in use by another app. Close other camera apps and try again."};setCameraMessage(messages[err.name]||`Could not start camera: ${err.name||"Unknown error"}${err.message?" — "+err.message:""}`,true)}
-};
-function stopCamera(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;video.srcObject=null;document.getElementById("start").disabled=false;document.getElementById("stop").disabled=true;setCameraMessage("Camera is off.");ctx.clearRect(0,0,canvas.width,canvas.height)}
-document.getElementById("stop").onclick=stopCamera;
-document.querySelectorAll("[data-corner]").forEach(b=>b.onclick=()=>{if(!stream){setCameraMessage("Enable the camera first.",true);return}activeCorner=b.dataset.corner;renderCalibration();setCameraMessage(`Now tap the ${cornerNames[activeCorner].toLowerCase()} corner of your monitor in the preview.`)});
-tapLayer.addEventListener("click",e=>{
-if(!activeCorner){setCameraMessage("Choose one of the four corner buttons first.");return}
-const rect=tapLayer.getBoundingClientRect(),vw=video.videoWidth,vh=video.videoHeight;if(!vw||!vh)return;
-const scale=Math.min(rect.width/vw,rect.height/vh),w=vw*scale,h=vh*scale,ox=(rect.width-w)/2,oy=(rect.height-h)/2;
-const x=e.clientX-rect.left-ox,y=e.clientY-rect.top-oy;
-if(x<0||y<0||x>w||y>h){setCameraMessage("Tap inside the visible camera image, not the black bars.");return}
-calibration[activeCorner]={x:x/w,y:y/h};localStorage.setItem(CAL_KEY,JSON.stringify(calibration));
-const done=activeCorner;activeCorner=null;renderCalibration();setCameraMessage(`${cornerNames[done]} corner saved. Choose the next corner.`);
-});
-document.getElementById("clearCal").onclick=()=>{calibration={};activeCorner=null;localStorage.removeItem(CAL_KEY);renderCalibration();setCameraMessage("Calibration cleared.")};
-video.addEventListener("loadedmetadata",drawMarkers);window.addEventListener("resize",drawMarkers);window.addEventListener("pagehide",stopCamera);
-render();renderCalibration();
-})();
-</script>
-</body>
-</html>
+(()=>{const KEY="pirate_token_tracker_v1",DROP=137500,defaults={opens:0,effectiveOpens:0,party:4,multiplier:1.5,powerOn:false};let d={...defaults};try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s&&typeof s==="object")d={...defaults,...s}}catch(e){}const $=id=>document.getElementById(id),fmt=n=>Math.round(n).toLocaleString();function save(){localStorage.setItem(KEY,JSON.stringify(d))}function render(){ $("myTotal").textContent=fmt(d.opens);$("manualTotal").value=d.opens;$("party").value=String(d.party);$("multiplier").value=d.multiplier;$("powerOn").checked=!!d.powerOn;$("powerStatus").textContent=d.powerOn?`Active · ${d.multiplier}×`:"Currently off · 1×";$("myEffective").textContent=fmt(d.effectiveOpens);const pe=d.effectiveOpens*d.party;$("partyEffective").textContent=fmt(pe);const p=1-Math.pow(1-1/DROP,pe);$("chance").textContent=(p*100).toFixed(p*100<.001?5:3)+"%";$("progressBar").style.width=Math.min(100,pe/DROP*100)+"%";$("progressText").textContent=`${fmt(pe)} of ${fmt(DROP)} effective party opens (average target)`;$("expected").textContent=fmt(DROP);$("remaining").textContent=fmt(Math.max(0,DROP-pe));save()}function add(n){d.opens+=n;d.effectiveOpens+=n*(d.powerOn?Number(d.multiplier):1);render()}document.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>add(Number(b.dataset.add)));$("minus").onclick=()=>{if(d.opens<=0)return;d.opens--;d.effectiveOpens=Math.max(0,d.effectiveOpens-(d.powerOn?Number(d.multiplier):1));render()};$("setTotal").onclick=()=>{const v=Number($("manualTotal").value);if(!Number.isSafeInteger(v)||v<0){alert("Enter a whole number of 0 or more.");return}d.opens=v;d.effectiveOpens=v;render()};$("party").onchange=e=>{d.party=Number(e.target.value);render()};$("multiplier").onchange=e=>{let v=Number(e.target.value);if(!Number.isFinite(v)||v<1)v=1;if(v>100)v=100;d.multiplier=v;render()};$("powerOn").onchange=e=>{d.powerOn=e.target.checked;render()};render()})();
+</script></body></html>
